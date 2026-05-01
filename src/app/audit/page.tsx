@@ -29,10 +29,10 @@ interface Decision {
 type FilterAction = 'all' | 'Acknowledge' | 'Approve' | 'Investigate' | 'Resolve';
 
 const actionConfig: Record<string, { icon: typeof CheckCircle; color: string; bg: string }> = {
-  Acknowledge: { icon: Eye, color: 'text-slate-700', bg: 'bg-slate-100' },
-  Approve: { icon: CheckCircle, color: 'text-emerald-700', bg: 'bg-emerald-50' },
-  Investigate: { icon: MagnifyingGlass, color: 'text-yellow-700', bg: 'bg-yellow-50' },
-  Resolve: { icon: Wrench, color: 'text-blue-700', bg: 'bg-blue-50' },
+  Acknowledge: { icon: Eye,            color: 'text-[#374151]', bg: 'bg-[#f3f4f6]' },
+  Approve:     { icon: CheckCircle,    color: 'text-[#059669]', bg: 'bg-[#ecfdf5]' },
+  Investigate: { icon: MagnifyingGlass,color: 'text-[#b45309]', bg: 'bg-[#fffbeb]' },
+  Resolve:     { icon: Wrench,         color: 'text-[#1d4ed8]', bg: 'bg-[#eff6ff]' },
 };
 
 const containerVariants = {
@@ -126,14 +126,14 @@ export default function AuditPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-[100dvh] bg-[#f9fafb]">
+    <div className="flex flex-col min-h-[100dvh] bg-white">
       {/* Page Header */}
-      <div className="w-full border-b border-slate-200 bg-white">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <ClipboardText size={22} weight="duotone" className="text-slate-600" />
-            <h1 className="text-xl font-medium tracking-tight text-slate-900">Audit Trail</h1>
-            <span className="ml-2 px-2 py-0.5 rounded-full bg-slate-100 text-xs font-mono text-slate-600">
+      <div className="w-full border-b border-[#e5e7eb] bg-white">
+        <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <ClipboardText size={16} weight="duotone" className="text-[#6b7280]" />
+            <h1 className="text-sm font-semibold tracking-tight text-[#111111]">Audit Trail</h1>
+            <span className="ml-1.5 px-2 py-0.5 rounded-full bg-[#f3f4f6] border border-[#e5e7eb] text-xs font-mono text-[#6b7280]">
               {filtered.length} entries
             </span>
           </div>
@@ -160,28 +160,28 @@ export default function AuditPage() {
       </div>
 
       {/* Filters Bar */}
-      <div className="w-full border-b border-slate-100 bg-white">
+      <div className="w-full border-b border-[#e5e7eb] bg-white">
         <div className="max-w-7xl mx-auto px-6 py-3 flex flex-wrap items-center gap-4">
           {/* Search */}
           <div className="relative flex-1 min-w-[200px] max-w-sm">
-            <MagnifyingGlass size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <MagnifyingGlass size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9ca3af]" />
             <input
               type="text"
               placeholder="Search operator, zone, or comment..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-400 transition-all"
+              className="w-full pl-9 pr-4 py-2 text-sm bg-white border border-[#e5e7eb] rounded-md text-[#111111] placeholder:text-[#9ca3af] focus:outline-none focus:ring-1 focus:ring-[#111111] focus:border-[#111111] transition-all"
             />
           </div>
 
           {/* Action filter */}
           <div className="flex items-center gap-2">
-            <FunnelSimple size={16} className="text-slate-400" />
+            <FunnelSimple size={14} className="text-[#9ca3af]" />
             <div className="relative">
               <select
                 value={filterAction}
                 onChange={(e) => setFilterAction(e.target.value as FilterAction)}
-                className="appearance-none pl-3 pr-8 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-400 cursor-pointer"
+                className="appearance-none pl-3 pr-8 py-2 text-sm bg-white border border-[#e5e7eb] rounded-md text-[#111111] focus:outline-none focus:ring-1 focus:ring-[#111111] cursor-pointer"
               >
                 <option value="all">All Actions</option>
                 <option value="Acknowledge">Acknowledge</option>
@@ -189,20 +189,20 @@ export default function AuditPage() {
                 <option value="Investigate">Investigate</option>
                 <option value="Resolve">Resolve</option>
               </select>
-              <CaretDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+              <CaretDown size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#9ca3af] pointer-events-none" />
             </div>
           </div>
 
           {/* Type filter */}
-          <div className="flex rounded-lg border border-slate-200 overflow-hidden">
+          <div className="flex rounded-md border border-[#e5e7eb] overflow-hidden">
             {(['all', 'anomaly', 'proposal'] as const).map((type) => (
               <button
                 key={type}
                 onClick={() => setFilterType(type)}
-                className={`px-3 py-1.5 text-sm font-medium transition-colors ${
+                className={`px-3 py-1.5 text-xs font-medium transition-colors ${
                   filterType === type
-                    ? 'bg-slate-800 text-white'
-                    : 'bg-white text-slate-600 hover:bg-slate-50'
+                    ? 'bg-[#111111] text-white'
+                    : 'bg-white text-[#6b7280] hover:bg-[#f9fafb]'
                 }`}
               >
                 {type === 'all' ? 'All' : type.charAt(0).toUpperCase() + type.slice(1)}
@@ -214,15 +214,15 @@ export default function AuditPage() {
 
       {/* Table */}
       <div className="flex-1 w-full max-w-7xl mx-auto p-6">
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+        <div className="bg-white rounded-lg border border-[#e5e7eb] overflow-hidden">
           {/* Table Header */}
-          <div className="grid grid-cols-12 gap-4 px-6 py-3 border-b border-slate-100 bg-slate-50/80">
-            <div className="col-span-2 text-xs font-medium uppercase tracking-wider text-slate-500">Timestamp</div>
-            <div className="col-span-2 text-xs font-medium uppercase tracking-wider text-slate-500">Operator</div>
-            <div className="col-span-2 text-xs font-medium uppercase tracking-wider text-slate-500">Action</div>
-            <div className="col-span-1 text-xs font-medium uppercase tracking-wider text-slate-500">Type</div>
-            <div className="col-span-2 text-xs font-medium uppercase tracking-wider text-slate-500">Record</div>
-            <div className="col-span-3 text-xs font-medium uppercase tracking-wider text-slate-500">Comment</div>
+          <div className="grid grid-cols-12 gap-4 px-6 py-3 border-b border-[#e5e7eb]">
+            <div className="col-span-2 text-[10px] font-semibold uppercase tracking-wider text-[#9ca3af]">Timestamp</div>
+            <div className="col-span-2 text-[10px] font-semibold uppercase tracking-wider text-[#9ca3af]">Operator</div>
+            <div className="col-span-2 text-[10px] font-semibold uppercase tracking-wider text-[#9ca3af]">Action</div>
+            <div className="col-span-1 text-[10px] font-semibold uppercase tracking-wider text-[#9ca3af]">Type</div>
+            <div className="col-span-2 text-[10px] font-semibold uppercase tracking-wider text-[#9ca3af]">Record</div>
+            <div className="col-span-3 text-[10px] font-semibold uppercase tracking-wider text-[#9ca3af]">Comment</div>
           </div>
 
           {/* Table Body */}
@@ -268,11 +268,11 @@ export default function AuditPage() {
                       </div>
 
                       {/* Operator */}
-                      <div className="col-span-2 flex items-center gap-2.5">
-                        <div className="w-7 h-7 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-xs font-medium text-slate-600 shrink-0">
+                      <div className="col-span-2 flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-full bg-[#f3f4f6] border border-[#e5e7eb] flex items-center justify-center text-[11px] font-semibold text-[#111111] shrink-0">
                           {decision.operator_id.charAt(0).toUpperCase()}
                         </div>
-                        <span className="text-sm font-medium text-slate-800 truncate">{decision.operator_id}</span>
+                        <span className="text-sm font-medium text-[#111111] truncate">{decision.operator_id}</span>
                       </div>
 
                       {/* Action */}
@@ -296,14 +296,14 @@ export default function AuditPage() {
 
                       {/* Record ID */}
                       <div className="col-span-2">
-                        <span className="text-sm font-mono text-slate-700 bg-slate-50 px-2 py-0.5 rounded">
+                        <span className="text-xs font-mono text-[#374151] bg-[#f3f4f6] px-2 py-0.5 rounded">
                           {decision.record_id}
                         </span>
                       </div>
 
                       {/* Comment */}
                       <div className="col-span-3">
-                        <p className="text-sm text-slate-600 line-clamp-2 leading-relaxed">{decision.comment}</p>
+                        <p className="text-xs text-[#6b7280] line-clamp-2 leading-relaxed">{decision.comment}</p>
                       </div>
                     </motion.div>
                   );
@@ -314,7 +314,7 @@ export default function AuditPage() {
         </div>
 
         {/* Footer summary */}
-        <div className="mt-4 flex items-center justify-between text-xs text-slate-500">
+        <div className="mt-4 flex items-center justify-between text-[11px] text-[#9ca3af]">
           <span>
             Showing {filtered.length} of {decisions.length} decisions
           </span>

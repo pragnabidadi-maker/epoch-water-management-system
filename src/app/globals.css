@@ -1,86 +1,85 @@
 @import "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
 @import "tailwindcss";
 
+/* ── Design tokens ─────────────────────────────────────────── */
 :root {
-  --background: #f9fafb;
-  --foreground: #0f172a;
-  --sidebar-width: 240px;
+  --background:    #ffffff;
+  --foreground:    #111111;
+  --muted:         #6b7280;   /* secondary text */
+  --border:        #e5e7eb;   /* dividers */
+  --surface:       #ffffff;   /* cards, panels */
+  --surface-hover: #f9fafb;   /* hover states */
+  --accent:        #059669;   /* emerald – primary action */
+  --accent-light:  #ecfdf5;   /* emerald tint */
+  --sidebar-width: 220px;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-foreground:  var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+/* ── Base ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: #ffffff;
+  color: #111111;
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ── Custom scrollbar ─────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
+/* ── Scrollbar — ultra-thin, barely visible ────────────────── */
+::-webkit-scrollbar        { width: 4px; height: 4px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: #d1d5db; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
 
-/* ── Range input accent ───────────────────────────────────── */
+/* ── Range slider ─────────────────────────────────────────── */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
-  height: 6px;
-  background: #e2e8f0;
-  border-radius: 3px;
+  height: 2px;
+  background: #e5e7eb;
+  border-radius: 2px;
   outline: none;
 }
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: #059669;
+  background: #111111;
   cursor: pointer;
-  border: 2px solid white;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 1px #e5e7eb;
 }
 input[type="range"]::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: #059669;
+  background: #111111;
   cursor: pointer;
-  border: 2px solid white;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 1px #e5e7eb;
 }
 
-/* ── Leaflet overrides ────────────────────────────────────── */
+/* ── Leaflet — white tile, clean popups ───────────────────── */
 .leaflet-container {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
-  background: #f8fafc;
+  background: #ffffff;
 }
 .leaflet-popup-content-wrapper {
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+  border: 1px solid #e5e7eb;
+  color: #111111;
 }
+.leaflet-popup-tip { background: #ffffff; }
 
-/* ── Table hover row ──────────────────────────────────────── */
-.audit-row {
-  transition: background-color 150ms ease;
-}
-.audit-row:hover {
-  background-color: #f1f5f9;
-}
+/* ── Audit table row hover ────────────────────────────────── */
+.audit-row { transition: background-color 100ms ease; }
+.audit-row:hover { background-color: #f9fafb; }

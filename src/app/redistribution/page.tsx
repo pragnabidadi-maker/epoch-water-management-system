@@ -57,10 +57,10 @@ export default function RedistributionPage() {
   if (!data) return <div className="p-8 text-center text-slate-500">Loading Optimization Engine...</div>;
 
   return (
-    <div className="flex flex-col min-h-[100dvh] bg-[#f9fafb]">
-      <div className="w-full border-b border-slate-200 bg-white">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <h1 className="text-xl font-medium tracking-tight text-slate-900">Fairness Optimization</h1>
+    <div className="flex flex-col min-h-[100dvh] bg-white">
+      <div className="w-full border-b border-[#e5e7eb] bg-white">
+        <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+          <h1 className="text-sm font-semibold tracking-tight text-[#111111]">Fairness Optimization</h1>
           <Button variant="outline" size="sm">Bulk Approve Safe</Button>
         </div>
       </div>
@@ -69,47 +69,47 @@ export default function RedistributionPage() {
         
         {/* Left Metrics Panel */}
         <section className="lg:col-span-5 flex flex-col gap-6">
-          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col items-center">
-            <h2 className="text-lg font-medium text-slate-900 self-start mb-4">Network Equality</h2>
+          <div className="bg-white rounded-lg border border-[#e5e7eb] p-6 flex flex-col items-center">
+            <h2 className="text-sm font-semibold text-[#111111] self-start mb-4">Network Equality</h2>
             <div className="h-48 w-full max-w-xs">
               <GiniGauge value={data.current_gini} />
             </div>
-            
+
             {data.projected_gini < data.current_gini && (
-              <div className="mt-4 w-full py-3 px-4 bg-emerald-50 border border-emerald-100 rounded-lg text-sm text-emerald-800 flex justify-between items-center">
-                <span>Projected Gini after proposals:</span>
-                <span className="font-mono font-medium">{data.projected_gini.toFixed(2)}</span>
+              <div className="mt-4 w-full py-2.5 px-4 border border-[#e5e7eb] rounded-md text-xs flex justify-between items-center">
+                <span className="text-[#6b7280]">Projected Gini after proposals:</span>
+                <span className="font-mono font-semibold text-[#059669]">{data.projected_gini.toFixed(2)}</span>
               </div>
             )}
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-            <h3 className="font-medium text-slate-900 mb-4">Capacity Status</h3>
+          <div className="bg-white rounded-lg border border-[#e5e7eb] p-6">
+            <h3 className="text-sm font-semibold text-[#111111] mb-4">Capacity Status</h3>
             <div className="flex justify-between items-center mb-6">
               <div className="text-center">
-                <div className="text-3xl font-mono text-emerald-600">{data.surplus_count}</div>
-                <div className="text-xs uppercase tracking-widest text-slate-500 mt-1">Surplus Zones</div>
+                <div className="text-3xl font-mono text-[#059669]">{data.surplus_count}</div>
+                <div className="text-[10px] uppercase tracking-widest text-[#9ca3af] mt-1">Surplus Zones</div>
               </div>
-              <div className="w-px h-12 bg-slate-200" />
+              <div className="w-px h-10 bg-[#e5e7eb]" />
               <div className="text-center">
-                <div className="text-3xl font-mono text-orange-600">{data.deficit_count}</div>
-                <div className="text-xs uppercase tracking-widest text-slate-500 mt-1">Deficit Zones</div>
+                <div className="text-3xl font-mono text-orange-500">{data.deficit_count}</div>
+                <div className="text-[10px] uppercase tracking-widest text-[#9ca3af] mt-1">Deficit Zones</div>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-slate-100">
+            <div className="pt-4 border-t border-[#e5e7eb]">
               <div className="flex justify-between items-center mb-2">
-                <label className="text-sm font-medium text-slate-700">Optimization Weight</label>
-                <span className="text-xs font-mono bg-slate-100 px-2 py-1 rounded text-slate-600">{fairnessWeight.toFixed(2)}</span>
+                <label className="text-xs font-medium text-[#374151]">Optimization Weight</label>
+                <span className="text-xs font-mono bg-[#f3f4f6] border border-[#e5e7eb] px-2 py-0.5 rounded text-[#374151]">{fairnessWeight.toFixed(2)}</span>
               </div>
-              <input 
-                type="range" 
-                min="0" max="1" step="0.1" 
+              <input
+                type="range"
+                min="0" max="1" step="0.1"
                 value={fairnessWeight}
                 onChange={handleWeightChange}
-                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
+                className="w-full cursor-pointer"
               />
-              <div className="flex justify-between text-xs text-slate-500 mt-2">
+              <div className="flex justify-between text-[10px] text-[#9ca3af] mt-2">
                 <span>Pressure Safety</span>
                 <span>Fairness/Equity</span>
               </div>
@@ -119,8 +119,8 @@ export default function RedistributionPage() {
 
         {/* Right Proposals Queue */}
         <section className="lg:col-span-7">
-          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 min-h-full">
-            <h2 className="text-lg font-medium text-slate-900 mb-6">Recommended Actions</h2>
+          <div className="bg-white rounded-lg border border-[#e5e7eb] p-6 min-h-full">
+            <h2 className="text-sm font-semibold text-[#111111] mb-5">Recommended Actions</h2>
             <ProposalQueue proposals={data.proposals} onApprove={handleApprove} />
           </div>
         </section>
